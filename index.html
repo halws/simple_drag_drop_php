@@ -10,7 +10,7 @@
 
 <body>
    <!-- <div> -->
-   	 <form class="box uk-width-2-3 uk-margin-auto" method="post" action="" enctype="multipart/form-data">
+   	 <form class="box uk-placeholder uk-text-center uk-width-3-4" method="post" action="" enctype="multipart/form-data">
         <div class="box__input">
             <label for="file" class="uk-margin"><strong>Choose a file</strong>
             <span class="uk-hidden"> or drag it here</span>.</label><br>
@@ -20,9 +20,11 @@
             <button class="box__button uk-button uk-button-default" type="submit">Upload</button>
         </div>
         <div class="box__uploading">Uploading&hellip;</div>
-        <div class="box__success">Done!</div>
-        <div class="box__error uk-background-primary">Error! <span></span>.</div>
+        <div class="box__success uk-alert-success uk-hidden">Done!</div>
+        <div class="box__error uk-alert-danger uk-width-auto uk-hidden">Error! <span></span></div>
+        <!-- <progress id="progressbar" class="uk-progress" value="0" max="100" visible></progress> -->
     </form>
+
    <!-- </div> -->
     <!-- <div class=" uk-placeholder uk-text-center"></div> -->
    <!--  <div id="messages" class="uk-card">

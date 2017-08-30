@@ -7,14 +7,14 @@ body{
 	align-items: center;
 }
 .box__dragndrop,
-.box__uploading,
-.box__success
+.box__uploading
  {
   display: none;
 }
 .box__error{
+	background-color: red;
 	color:#fff;
-	display: block;
+	/*display: block;*/
 }
 .box.is-uploading .box__input {
   visibility: hidden;

@@ -3,12 +3,17 @@ var isAdvanceUpload = function() {
     return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
 };
 $(function() {
-
-    var form = $('.box');
-    var input = form.find('input[type="file"]'),
-        errorMsg = form.find('.box__error span'),
+    var form = $('.box'),
+        box__input = $('.box__input'),
+        box__error = $('.box__error'),
+        box__success = $('.box__success'),
+        errorMsg = box__error.find('span'),
+        input = form.find('input[type="file"]'),
         label = form.find('label'),
         showFiles = function(files) {
+            box__input.removeClass('uk-background-muted');
+            $('.box__error').addClass('uk-hidden');
+            errorMsg.empty();
             label.text(files.length > 1 ? (input.attr('data-multiple-caption') || '').replace('{count}', files.length) : files[0].name);
         };
     if (isAdvanceUpload) {
@@ -32,6 +37,9 @@ $(function() {
 
             droppedFiles = event.originalEvent.dataTransfer.files;
             showFiles(droppedFiles);
+        }).on('change', function(event) {
+            $('.box__error').addClass('uk-hidden');
+            // errorMsg.empty();
         }).on('submit', function(event) {
             if (form.hasClass('is-uploading')) {
                 return false;
@@ -60,15 +68,24 @@ $(function() {
                         form.removeClass('is-uploading');
                     },
                     success: function(data) {
-                        form.addClass(data.success === true ? 'is-success' : 'is-error');
                         console.log(data.success);
+                        box__input.addClass(data.success === true ? 'uk-invisible' : 'uk-background-muted');
                         if (!data.success) {
-                            errorMsg.text(data.error);
-                        }
+                            $('.box__error').removeClass('uk-hidden');
+                            console.log(data.error);
+                            console.log(errorMsg);
+                            // errorMsg;
+                            // $('.box__error span').text("WTF");
+                            errorMsg.append('<pre>' + data.error + '</pre>');
+                        }else{
+                        box__success.removeClass('uk-hidden');
+                            // errorMsg.append('<pre>' + data.error + '</pre>');
+                            }
+
                     },
                     error: function(data) {
-                        $('.box__error').attr('display', 'block').find('span').append('<pre>' + data.responseText + '</pre>');
-                        console.log(data.responseText);
+                        $('.box__error').removeClass('uk-hidden');
+                        errorMsg.append('<pre>' + data.error + '</pre>');
                     }
                 });
                 input.on('change', function(event) {
