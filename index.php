@@ -21,16 +21,16 @@
 					if (getimagesize($tmp_name)!==false) {
 						$uploadOk = 1;
 					} else {
-						$error_msg .= $name . " is not an image " . " <br> ";
+						$error_msg .="is not an image " . " <br> ";
 						$uploadOk = 0;
 					}
 					if ($size>2097152) {
-						$error_msg .= $name . " it's too large " . " <br> ";
+						$error_msg .="it's too large " . " <br> ";
 						$uploadOk = 0;
 						
 					}
 					if($type!="image/jpg" && $type!="image/png" && $type!="image/jpeg" && $type!="image/gif" ) {
-						$error_msg .= $name . " is not an image " . $type . " <br> ";
+						$error_msg .=" is not an image " . " <br> ";
    				 $uploadOk = 0;
 }
 					if ($uploadOk == 0) {
